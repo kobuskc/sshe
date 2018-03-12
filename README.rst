@@ -20,7 +20,7 @@ Usage
 -----
 
 ::
-
+```
 usage: sshe [-h] [-Agent] [-Dynamic DYNAMIC] [-Local LOCAL] [-login LOGIN]
             [-quiet] [-region REGION] [-timeout TIMEOUT]
 
@@ -33,3 +33,4 @@ optional arguments:
   -quiet            Hide all SSH error messages
   -region REGION    Which region is the instance in?
   -timeout TIMEOUT  How many seconds do you want to wait?The default is 10 seconds.
+```

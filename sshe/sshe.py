@@ -147,7 +147,7 @@ class sshe(object):
         else:
             local = ""
 
-        if self.Quiet:
+        if self.quiet:
             quiet = "-q"
         else:
             quiet = ""
