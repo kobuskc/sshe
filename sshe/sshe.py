@@ -49,7 +49,7 @@ class sshe(object):
         parser.add_argument('-Agent', action="store_true",
                             help="Enables forwarding of the authentication agent connection.")
         parser.add_argument('-Dynamic', type=str,
-                            help="Specifies a local ``dynamic'' application-level port forwarding.")
+                            help="Specifies a local 'dynamic' application-level port forwarding.")
         parser.add_argument('-Local', type=str, help="Specifies a local port to forward to the remote server.")
         parser.add_argument('-login', type=str, default='ec2-user', help="The username you want to connect with." \
                             "The default is ec2-user")

@@ -27,12 +27,9 @@ usage: sshe [-h] [-Agent] [-Dynamic DYNAMIC] [-Local LOCAL] [-login LOGIN]
 optional arguments:
   -h, --help        show this help message and exit
   -Agent            Enables forwarding of the authentication agent connection.
-  -Dynamic DYNAMIC  Specifies a local ``dynamic'' application-level port
-                    forwarding.
+  -Dynamic DYNAMIC  Specifies a local "dynamic" application-level port forwarding.
   -Local LOCAL      Specifies a local port to forward to the remote server.
-  -login LOGIN      The username you want to connect with.The default is
-                    ec2-user
+  -login LOGIN      The username you want to connect with.The default is ec2-user
   -quiet            Hide all SSH error messages
   -region REGION    Which region is the instance in?
-  -timeout TIMEOUT  How many seconds do you want to wait?The default is 10
-                    seconds.
+  -timeout TIMEOUT  How many seconds do you want to wait?The default is 10 seconds.
