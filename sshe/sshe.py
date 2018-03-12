@@ -37,7 +37,9 @@ class sshe(object):
         self.ec2 = None
         self.Agent = None
         self.Dynamic = None
+        self.Local = None
         self.login = None
+        self.quiet = None
         self.region = None
         self.timeout = None
 
@@ -48,8 +50,10 @@ class sshe(object):
                             help="Enables forwarding of the authentication agent connection.")
         parser.add_argument('-Dynamic', type=str,
                             help="Specifies a local ``dynamic'' application-level port forwarding.")
+        parser.add_argument('-Local', type=str, help="Specifies a local port to forward to the remote server.")
         parser.add_argument('-login', type=str, default='ec2-user', help="The username you want to connect with." \
                             "The default is ec2-user")
+        parser.add_argument('-quiet', action="store_true", help="Hide all SSH error messages")
         parser.add_argument('-region', type=str, help="Which region is the instance in?")
         parser.add_argument('-timeout', type=int, help="How many seconds do you want to wait?" \
                             "The default is 10 seconds.", default=10)
@@ -58,7 +62,9 @@ class sshe(object):
 
         self.Agent = cmdargs.Agent
         self.Dynamic = cmdargs.Dynamic
+        self.Local = cmdargs.Local
         self.login = cmdargs.login
+        self.quiet = cmdargs.quiet
         self.region = cmdargs.region
         self.timeout = cmdargs.timeout
 
@@ -136,9 +142,20 @@ class sshe(object):
         else:
             dynamic = ""
 
+        if self.Local:
+            local = "-L " + self.Dynamic + ":127.0.0.1:" + self.Local + " "
+        else:
+            local = ""
+
+        if self.Quiet:
+            quiet = "-q"
+        else:
+            quiet = ""
+
         timeout = " -o ConnectTimeout=" + str(self.timeout) + " "
 
-        args = agent + dynamic + timeout + self.login + "@" + instances[choice][2]
+        args = agent + dynamic + local + quiet + timeout + self.login + "@" + instances[choice][2]
+        print ("Args: %s" % args)
 
         try:
             retcode = subprocess.call("ssh " + args, shell=True)
