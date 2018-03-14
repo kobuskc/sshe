@@ -155,7 +155,6 @@ class sshe(object):
         timeout = " -o ConnectTimeout=" + str(self.timeout) + " "
 
         args = agent + dynamic + local + quiet + timeout + self.login + "@" + instances[choice][2]
-        print ("Args: %s" % args)
 
         try:
             retcode = subprocess.call("ssh " + args, shell=True)
