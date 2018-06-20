@@ -22,40 +22,52 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 '''
+import sys
 from setuptools import setup, find_packages
 import sshe
 
-with open('requirements.txt') as fh:
+major, minor = sys.version_info[0:2]
+if major != 3 or minor < 5:
+    print("Graffiti Monkey requires Python 3.5.x")
+    sys.exit(1)
+
+with open("requirements.txt") as fh:
     requires = [requirement.strip() for requirement in fh]
 
+
 exclude_packages = [
-    'test',
-]
+     'test',
+ ]
 
 setup(
-    name='sshe',
-    version=sshe.__version__,
-    description='Prints a list of available EC2 Linux instances in the specified region to connect to.',
-    long_description=open('README.rst').read(),
-    author=sshe.__author__,
-    author_email='kobuskc@gmail.com',
-    packages=find_packages(exclude=exclude_packages),
-    package_dir={'sshe': 'sshe'},
-    include_package_data=True,
-    zip_safe=False,
-    scripts=['bin/sshe'],
-    install_requires=requires,
-    license=open("LICENSE.txt").read(),
-    classifiers=(
-        'Development Status :: 0.1 - Beta',
-        'Environment :: Console',
-        'Intended Audience :: Developers',
-        'Intended Audience :: Information Technology',
-        'Intended Audience :: System Administrators',
-        'License :: OSI Approved :: Apache Software License',
-        'Natural Language :: English',
-        'Programming Language :: Python :: 3.6',
-        'Topic :: System :: Installation/Setup',
-        'Topic :: Utilities',
-    )
+     name='sshe',
+     version=sshe.__version__,
+     description='Prints a list of available EC2 Linux instances in the specified region to connect to.',
+     long_description=open('README.rst').read(),
+     author=sshe.__author__,
+     author_email='kobuskc@gmail.com',
+     packages=find_packages(exclude=exclude_packages),
+     package_dir={'sshe': 'sshe'},
+     include_package_data=True,
+     zip_safe=False,
+     scripts=['bin/sshe'],
+     install_requires=requires,
+     entry_points = {
+         'console_scripts': [
+             'sshe = sshe.sshe:run',
+        ]
+     },
+     license=open("LICENSE.txt").read(),
+     classifiers=(
+         'Development Status :: 0.1',
+         'Environment :: Console',
+         'Intended Audience :: Developers',
+         'Intended Audience :: Information Technology',
+         'Intended Audience :: System Administrators',
+         'License :: OSI Approved :: Apache Software License',
+         'Natural Language :: English',
+         'Programming Language :: Python :: 3.6',
+         'Topic :: System :: Installation/Setup',
+         'Topic :: Utilities',
+     )
 )
