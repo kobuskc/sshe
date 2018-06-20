@@ -165,4 +165,6 @@ class sshe(object):
         except OSError as e:
             print("Execution failed:", e, file=sys.stderr)
 
-client = sshe()
+def run():
+    cli = sshe()
+    cli.run()
