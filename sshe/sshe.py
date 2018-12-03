@@ -49,7 +49,7 @@ class sshe(object):
         parser.add_argument('-Agent', action="store_true",
                             help="Enables forwarding of the authentication agent connection.")
         parser.add_argument('-Dynamic', type=str,
-                            help="Specifies a local 'dynamic' application-level port forwarding.")
+                            help="Specifies local 'dynamic' application-level port forwarding.")
         parser.add_argument('-Local', type=str, help="Specifies a local port to forward to the remote server.")
         parser.add_argument('-login', type=str, default='ec2-user', help="The username you want to connect with." \
                             "The default is ec2-user")
@@ -143,7 +143,7 @@ class sshe(object):
             dynamic = ""
 
         if self.Local:
-            local = "-L " + self.Dynamic + ":127.0.0.1:" + self.Local + " "
+            local = "-L " + self.Local + ":127.0.0.1:" + self.Local + " "
         else:
             local = ""
 
@@ -155,6 +155,7 @@ class sshe(object):
         timeout = " -o ConnectTimeout=" + str(self.timeout) + " "
 
         args = agent + dynamic + local + quiet + timeout + self.login + "@" + instances[choice][2]
+        print ("Args: %s" % args)
 
         try:
             retcode = subprocess.call("ssh " + args, shell=True)
@@ -165,6 +166,4 @@ class sshe(object):
         except OSError as e:
             print("Execution failed:", e, file=sys.stderr)
 
-def run():
-    cli = sshe()
-    cli.run()
+client = sshe()
